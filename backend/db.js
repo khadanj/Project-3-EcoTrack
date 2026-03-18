@@ -20,4 +20,9 @@ async function connectDB() {
     console.log('Connected to MongoDB')
 }
 
-export { connectDB, db }
+// function that gets database from other files
+function getDB() {
+    return db
+}
+
+export { connectDB, getDB }
