@@ -18,6 +18,7 @@ async function connectDB() {
   await client.connect();
   db = client.db('ecotrack');
   console.log('Connected to MongoDB');
+  console.log('Using database:', db.databaseName);
 }
 
 // function that gets database from other files
