@@ -1,6 +1,8 @@
 // this is the register page where users can create a new account
 import { useState } from 'react'
 import PropTypes from 'prop-types'
+import './RegisterPage.css'
+
 
 function RegisterPage({ onRegisterSuccess }) {
 

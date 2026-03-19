@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { useUser } from '../context/UserContext'
 import PropTypes from 'prop-types'
-
+import './LoginPage.css'
 
 function LoginPage({ onLoginSuccess }) {
 

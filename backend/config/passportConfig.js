@@ -10,8 +10,6 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, async function (email
     try {
         // try finding user by email
         const user = await findUserByEmail(email)
-        console.log('email received:', email)
-        console.log('user found in database:', user)
 
         // no user found, return false
         if (!user) {

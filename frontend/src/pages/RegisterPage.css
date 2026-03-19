@@ -1,0 +1,66 @@
+.register-page {
+  width: 350px;
+  margin: 80px auto;
+  padding: 30px;
+  background-color: white;
+  border: 1px solid #a5d6a7;
+  border-radius: 8px;
+}
+
+.register-page h2 {
+  text-align: center;
+  color: #2e7d32;
+  margin-bottom: 20px;
+}
+
+.register-page div {
+  margin-bottom: 15px;
+}
+
+.register-page label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.register-page input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.register-page button[type='submit'] {
+  width: 100%;
+  padding: 10px;
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.register-page button[type='submit']:hover {
+  background-color: #1b5e20;
+}
+
+.register-page p {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.register-page p button {
+  background: none;
+  border: none;
+  color: #2e7d32;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 14px;
+}

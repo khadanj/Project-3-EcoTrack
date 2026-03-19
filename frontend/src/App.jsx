@@ -70,10 +70,20 @@ function AppContent() {
   return (
     <div>
       <h1>EcoTrack</h1>
-      <p>Welcome, {user.name}!</p>
-      <button onClick={handleLogout}>Logout</button>
-      <ActivityForm selectedActivity={selectedActivity} onSave={handleSave} />
-      <ActivityList onEdit={handleEdit} refreshTrigger={refreshTrigger} />
+
+      <div className='navbar'>
+        <button>Log Activities</button>
+        <button>Create Goals</button>
+         <span style={{ marginLeft: 'auto', fontSize: '14px', alignSelf: 'center' }}>
+          Welcome, {user.name}!
+         </span>
+          <button onClick={handleLogout}>Logout</button>
+      </div>
+
+      <div style={{ display: 'flex', gap: '20px', padding: '20px' }}>
+        <ActivityForm selectedActivity={selectedActivity} onSave={handleSave} />
+        <ActivityList onEdit={handleEdit} refreshTrigger={refreshTrigger} />
+      </div>
     </div>
   );
 }
