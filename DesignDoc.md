@@ -40,3 +40,11 @@ Users can also set monthly reduction goals, like cutting down on meat or taking 
 
 ## Design Mockups
 
+### Homepage
+![alt text](<images/p3 mockup 1.jpeg>)
+### Login and Register
+![alt text](<images/p3 mockup 2.jpeg>)
+### Activity Log Page
+![alt text](<images/p3 mockup 3.jpeg>)
+### Goal Page
+![alt text](<images/p3 mockup 4.jpeg>)
