@@ -1,8 +1,8 @@
 # EcoTrack: Personal Carbon & Habit Tracker
 
 ## Authors
-- Tamiyoo Desir
-- James Khadan
+- Tamiyoo Desir - [desir.t@northeastern.edu]
+- James Khadan - [khadan.j@northeastern.edu]
 
 ## Class Link
 CS 5610 Web Development - Spring 2026 
@@ -43,7 +43,7 @@ Make sure you have the following installed:
 
 1. Clone the repository:
 ```
-git clone [your repo link here]
+git clone https://github.com/TamiyooD02/Project-3-EcoTrack.git
 ```
 
 2. Start MongoDB using Docker:
@@ -65,6 +65,7 @@ SESSION_SECRET=ecotrack_secret_key_123
 
 5. Start the backend server:
 ```
+node seed.js
 node index.js
 ```
 
@@ -79,5 +80,9 @@ npm run dev
 ```
 http://localhost:5173
 ```
+## Video Demo
+
+## License
+MIT License - see LICENSE file for details
 
 ## AI Usage Disclosure

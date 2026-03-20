@@ -45,7 +45,7 @@ function LoginPage({ onLoginSuccess }) {
     <div className="login-page">
       <h2>Login</h2>
 
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <p>{error}</p>}
 
       <form onSubmit={handleSubmit}>
         <div>
