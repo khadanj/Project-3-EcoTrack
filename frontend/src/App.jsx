@@ -1,83 +1,88 @@
 // main app component
-import { useState } from 'react'
-import { UserProvider, useUser } from './context/UserContext'
-import ActivityList from './components/ActivityList/ActivityList'
-import ActivityForm from './components/ActivityForm/ActivityForm'
-import LoginPage from './pages/LoginPage'
-import RegisterPage from './pages/RegisterPage'
-import './index.css'
+import { useState } from 'react';
+import { UserProvider, useUser } from './context/UserContext';
+import ActivityList from './components/ActivityList/ActivityList';
+import ActivityForm from './components/ActivityForm/ActivityForm';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import './index.css';
 
 //component decides what to show based on if user is logged in
 function AppContent() {
-
   //keeps track of activity user clicked 'edit' on
   //starts at null
-  const [selectedActivity, setSelectedActivity] = useState(null)
+  const [selectedActivity, setSelectedActivity] = useState(null);
 
   // number increases every time user saves or delete
   //ActivityList watches this number and re-fetches when it changes
-  const [refreshTrigger, setRefreshTrigger] = useState(0)
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
 
   //track what page to show
-  const [currentPage, setCurrentPage] = useState('login')
+  const [currentPage, setCurrentPage] = useState('login');
 
   //get current user and setUser from context
-  const { user, setUser } = useUser()
+  const { user, setUser } = useUser();
 
   //when user clicks edit on an activity, save it to state
   function handleEdit(activity) {
-    setSelectedActivity(activity)
+    setSelectedActivity(activity);
   }
 
   //when form saves, clear selected activity
   function handleSave() {
-    setSelectedActivity(null)
-    setRefreshTrigger(refreshTrigger + 1)
+    setSelectedActivity(null);
+    setRefreshTrigger(refreshTrigger + 1);
   }
 
- // when the user clicks logout clear the user from context
+  // when the user clicks logout clear the user from context
   function handleLogout() {
     fetch('/api/auth/logout')
       .then(function (response) {
-        return response.json()
+        return response.json();
       })
       .then(function () {
-        setUser(null)
-        setCurrentPage('login')
-      })
+        setUser(null);
+        setCurrentPage('login');
+      });
   }
 
   // if user is not logged in show login or register page
   if (!user) {
     if (currentPage === 'register') {
       return (
-        <RegisterPage onRegisterSuccess={function () {
-          setCurrentPage('login')
-        }} />
-      )
+        <RegisterPage
+          onRegisterSuccess={function () {
+            setCurrentPage('login');
+          }}
+        />
+      );
     }
     return (
-      <LoginPage onLoginSuccess={function (page) {
-        if (page === 'register') {
-          setCurrentPage('register')
-        } else {
-          setCurrentPage('app')
-        }
-      }} />
-    )
+      <LoginPage
+        onLoginSuccess={function (page) {
+          if (page === 'register') {
+            setCurrentPage('register');
+          } else {
+            setCurrentPage('app');
+          }
+        }}
+      />
+    );
   }
 
   return (
     <div>
       <h1>EcoTrack</h1>
 
-      <div className='navbar'>
+      <div className="navbar">
         <button>Log Activities</button>
         <button>Create Goals</button>
-         <span style={{ marginLeft: 'auto', fontSize: '14px', alignSelf: 'center' }}>
+        <span
+          style={{ marginLeft: 'auto', fontSize: '14px', alignSelf: 'center' }}
+        >
           Welcome, {user.name}!
-         </span>
-          <button onClick={handleLogout}>Logout</button>
+        </span>
+        <button onClick={handleLogout}>Logout</button>
       </div>
 
       <div style={{ display: 'flex', gap: '20px', padding: '20px' }}>
@@ -94,7 +99,7 @@ function App() {
     <UserProvider>
       <AppContent />
     </UserProvider>
-  )
+  );
 }
 
 export default App;

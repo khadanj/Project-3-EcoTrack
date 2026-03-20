@@ -18,7 +18,7 @@ router.post('/', async (req, res) => {
     const result = await db.collection('activities').insertOne(activity);
     res.json(result);
   } catch {
-    res.status(500).json({ message: 'Error creating activity'})
+    res.status(500).json({ message: 'Error creating activity' });
   }
 });
 
@@ -30,14 +30,13 @@ router.get('/', async (req, res) => {
     if (req.query.date) {
       filter.date = req.query.date;
     }
-    
+
     // get activities from database
     const activities = await db.collection('activities').find(filter).toArray();
-    
-    res.json(activities);
 
+    res.json(activities);
   } catch {
-    res.status(500).json({ message: 'Error fetching activities'})
+    res.status(500).json({ message: 'Error fetching activities' });
   }
 });
 
@@ -50,27 +49,27 @@ router.put('/:id', async (req, res) => {
     const id = new ObjectId(req.params.id);
     const updatedActivity = req.body;
 
-    const result = await db.collection('activities').updateOne({ _id: id }, { $set: updatedActivity });
+    const result = await db
+      .collection('activities')
+      .updateOne({ _id: id }, { $set: updatedActivity });
     res.json(result);
-
   } catch {
-    res.status(500).json({ message: 'Error updating activity' })
+    res.status(500).json({ message: 'Error updating activity' });
   }
 });
 
 // deletes activity by its id
 router.delete('/:id', async (req, res) => {
   try {
-  const db = getDB();
+    const db = getDB();
 
-  //converts id from a string to mongodb ObjectId
-  const id = new ObjectId(req.params.id);
+    //converts id from a string to mongodb ObjectId
+    const id = new ObjectId(req.params.id);
 
-  const result = await db.collection('activities').deleteOne({ _id: id });
-  res.json(result);
-
+    const result = await db.collection('activities').deleteOne({ _id: id });
+    res.json(result);
   } catch {
-    res.status(500).json({ message: 'Error deleting activity '})
+    res.status(500).json({ message: 'Error deleting activity ' });
   }
 });
 
