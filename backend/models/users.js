@@ -29,7 +29,8 @@ async function findUserByEmail(email) {
 // find a user by id
 async function findUserById(id) {
     const db = getDB()
-    const user = await db.collection('users').findOne({_id: new ObjectId(id) })
+    const objectId = new ObjectId(id)
+    const user = await db.collection('users').findOne({_id: objectId })
     return user
 }
 

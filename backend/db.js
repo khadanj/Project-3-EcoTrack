@@ -15,10 +15,14 @@ const client = new MongoClient(uri);
 let db;
 
 async function connectDB() {
-  await client.connect();
-  db = client.db('ecotrack');
-  console.log('Connected to MongoDB');
-  console.log('Using database:', db.databaseName);
+  try {
+    await client.connect();
+    db = client.db('ecotrack');
+    console.log('Connected to MongoDB');
+    console.log('Using database:', db.databaseName);
+  } catch (err) {
+    console.log('Error connecting to MongoDB:', err)
+  }
 }
 
 // function that gets database from other files

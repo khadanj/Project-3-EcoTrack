@@ -12,39 +12,39 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, async function (email
         const user = await findUserByEmail(email)
 
         // no user found, return false
-        if (!user) {
+        if (user === null) {
             return done(null, false, {message: 'incorrect email or password'})
         }
         
         //check if password is correct
-        const passwordIsValid = await bcrypt.compare(password, user.passwordHash)
+        const isMatch = await bcrypt.compare(password, user.passwordHash)
 
         // id password wrong, return false
-        if (!passwordIsValid) {
+        if (isMatch === false) {
             return done(null, false, { message: 'incorrect email or password' })
         }
 
         //if correct, return the user
         return done(null, user)
     
-    } catch (error) {
-        return done(error)
+    } catch (err) {
+        return done(err)
     }
 }))
 
 // tells passport what to store in the session
 //only stores the user id
-passport.serializeUser(function (user, done) {
+passport.serializeUser((user, done) => {
     done(null, user._id)
 })
 
 //tells passport how to get full
-passport.deserializeUser(async function (id, done) {
+passport.deserializeUser(async (id, done) => {
     try {
         const user = await findUserById(id)
         done(null, user)
-    } catch (error) {
-        done(error)
+    } catch (err) {
+        done(err)
     }
 })
 
