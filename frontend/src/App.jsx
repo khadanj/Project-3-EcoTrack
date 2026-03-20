@@ -77,9 +77,7 @@ function AppContent() {
       <div className="navbar">
         <button>Log Activities</button>
         <button>Create Goals</button>
-        <span
-          style={{ marginLeft: 'auto', fontSize: '14px', alignSelf: 'center' }}
-        >
+        <span className="welcome-text">
           Welcome, {user.name}!
         </span>
         <button onClick={handleLogout}>Logout</button>
