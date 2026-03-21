@@ -40,3 +40,11 @@ Users can also set monthly reduction goals, like cutting down on meat or taking 
 
 ## Design Mockups
 
+### Homepage
+![alt text](<https://github.com/TamiyooD02/Project-3-EcoTrack/blob/main/images/p3%20mockup%201.jpeg?raw=true>)
+### Goal Page
+![alt text](<https://github.com/TamiyooD02/Project-3-EcoTrack/blob/main/images/p3%20mockup%202.jpeg?raw=true>)
+### Login and Register Page
+![alt text](<https://github.com/TamiyooD02/Project-3-EcoTrack/blob/main/images/p3%20mockup%203.jpeg?raw=true>)
+### Activities Page
+![alt text](<https://github.com/TamiyooD02/Project-3-EcoTrack/blob/main/images/p3%20mockup%204.jpeg?raw=true>)

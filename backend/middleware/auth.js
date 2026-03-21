@@ -1,10 +1,9 @@
 // checks if the user is logged in before allowing access
 
 function isAuthenticated(req, res, next) {
-  const loggedIn = req.isAuthenticated;
 
   //checks if there is a valid session for this user
-  if (loggedIn === true()) {
+  if (req.isAuthenticated()) {
     //user logged in, let them through
     return next();
   }
