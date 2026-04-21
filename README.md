@@ -32,7 +32,7 @@ EcoTrack is a full stack web application that helps everyday people understand a
 ![alt text](<images/Screenshot (279).png>)
 
 ## Public Deployment Link
-[Render Deployment Link]
+[[Render Deployment Link]](https://ecotrack-final-project.vercel.app/)
 
 ## Instructions to Build
 
