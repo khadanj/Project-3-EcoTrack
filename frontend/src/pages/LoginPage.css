@@ -74,3 +74,11 @@
   font-size: 14px;
   margin-bottom: 12px;
 }
+
+.app-title {
+  text-align: center;
+  color: #2e7d32;
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}

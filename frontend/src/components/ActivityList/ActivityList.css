@@ -20,8 +20,8 @@
 }
 
 .activity-list li {
-  display: grid;
-  grid-template-columns: 100px 1fr 80px 100px auto auto auto;
+  display: flex;
+  flex-wrap: wrap; 
   gap: 8px;
   align-items: center;
   padding: 10px;

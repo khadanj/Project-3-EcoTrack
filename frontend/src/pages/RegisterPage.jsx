@@ -40,6 +40,7 @@ function RegisterPage({ onRegisterSuccess }) {
 
   return (
     <div className="register-page">
+      <h1 className="app-title"> EcoTrack</h1>
       <h2>Register</h2>
 
       {error && <p className="error-message" role="alert">{error}</p>}

@@ -43,6 +43,7 @@ function LoginPage({ onLoginSuccess }) {
 
   return (
     <div className="login-page">
+      <h1 className="app-title"> EcoTrack</h1>
       <h2>Login</h2>
 
       {error && <p className="error-message" role="alert">{error}</p>}
