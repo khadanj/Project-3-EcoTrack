@@ -20,7 +20,7 @@ EcoTrack is a full stack web application that helps everyday people understand a
 
 ## Screenshots
 ### Login Page
-![login page to EcoTrack that features a green background along with an email field and a password field. Below that is a green button that says login. Underneath has a message that says "No account with Us? Register" Register is a hyperlink ](<images/Screenshot (276).png>)
+![login page to EcoTrack that features a green background along with an email field and a password field. Below that is a green button that says login. Underneath has a message that says "No account with Us? Register" Register is a hyperlink ](<images/register.png>)
 
 ### Register Page
 ![alt text](<images/register.png>)
