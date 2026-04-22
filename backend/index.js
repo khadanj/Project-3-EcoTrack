@@ -6,6 +6,7 @@ dotenv.config();
 import express from 'express';
 
 import session from 'express-session';
+import cors from 'cors';
 
 // import  passport config
 import passport from './config/passportConfig.js';
@@ -21,6 +22,18 @@ import authRouter from './routes/auth.js';
 // create the server app
 const app = express();
 
+const isProd = process.env.NODE_ENV === 'production';
+
+// Render terminates TLS at its proxy; required for secure cookies to work
+app.set('trust proxy', 1);
+
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true,
+  }),
+);
+
 // lets the server read JSON data from the frontend
 app.use(express.json());
 
@@ -34,6 +47,8 @@ app.use(
     cookie: {
       // session expires after 1 day
       maxAge: 1000 * 60 * 60 * 24,
+      secure: isProd,
+      sameSite: isProd ? 'none' : 'lax',
     },
   }),
 );
@@ -52,9 +67,11 @@ app.get('/api/ping', (req, res) => {
   res.json({ ok: true });
 });
 
+const PORT = process.env.PORT || 3001;
+
 // connect to mongodb first then start the server
 connectDB().then(() => {
-  app.listen(3001, () => {
-    console.log('Server running on port 3001');
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
   });
 });

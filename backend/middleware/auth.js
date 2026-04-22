@@ -1,7 +1,6 @@
 // checks if the user is logged in before allowing access
 
 function isAuthenticated(req, res, next) {
-
   //checks if there is a valid session for this user
   if (req.isAuthenticated()) {
     //user logged in, let them through
