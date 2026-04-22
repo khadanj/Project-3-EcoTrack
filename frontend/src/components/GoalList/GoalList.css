@@ -2,14 +2,14 @@
   flex: 1;
   padding: 20px;
   background-color: white;
-  border: 1px solid #a5d6a7;
+  border: 1px solid var(--color-accent);
   border-radius: 8px;
   overflow-y: auto;
   max-height: 600px;
 }
 
 .goal-list h2 {
-  color: #2e7d32;
+  color: var(--color-primary);
   margin-bottom: 15px;
 }
 
@@ -27,7 +27,7 @@
   padding: 10px;
   margin-bottom: 8px;
   background-color: #f1f8e9;
-  border: 1px solid #c8e6c9;
+  border: 1px solid var(--color-accent-soft);
   border-radius: 6px;
   font-size: 14px;
 }
@@ -43,8 +43,8 @@
 }
 
 .goal-status-active {
-  background-color: #c8e6c9;
-  color: #2e7d32;
+  background-color: var(--color-accent-soft);
+  color: var(--color-primary);
 }
 
 .goal-status-completed {
@@ -55,7 +55,7 @@
 /* edit button */
 .goal-list li button:first-of-type {
   padding: 4px 10px;
-  background-color: #2e7d32;
+  background-color: var(--color-primary);
   color: white;
   border: none;
   border-radius: 4px;
@@ -67,10 +67,24 @@
 /* delete button */
 .goal-list li button:last-of-type {
   padding: 4px 10px;
-  background-color: #c62828;
+  background-color: var(--color-danger);
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 12px;
+}
+
+.goal-list-description {
+  color: var(--color-text-muted, #555);
+  font-size: 14px;
+  margin: 0 0 16px 0;
+  line-height: 1.5;
+}
+
+.goal-list .no-results {
+  color: #888;
+  font-size: 14px;
+  text-align: center;
+  padding: 20px 0;
 }

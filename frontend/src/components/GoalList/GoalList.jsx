@@ -11,16 +11,17 @@ function GoalList({ onEdit, refreshTrigger }) {
   //fetch goals when the component first loads
   useEffect(
     function () {
-      // fetch the goals from backend server
       fetch('/api/goals')
         .then(function (response) {
-          // convert the response to json
           return response.json();
         })
         .then(function (data) {
-          //sort goals by deadline (nearest first)
+          if (!Array.isArray(data)) {
+            setGoals([]);
+            return;
+          }
           const sorted = data.sort(function (a, b) {
-            return new Date(a.deadline) - new Date(b.deadline);
+            return new Date(b.deadline) - new Date(a.deadline);
           });
           setGoals(sorted);
         });
@@ -30,34 +31,42 @@ function GoalList({ onEdit, refreshTrigger }) {
 
   // this function runs when user clicks the delete button on a goal
   function handleDelete(id) {
-    // send a DELETE request to the backend with the goal id
+    const confirmed = window.confirm(
+      'Are you sure you want to delete this goal?',
+    );
+    if (!confirmed) return;
+
     fetch('/api/goals/' + id, {
       method: 'DELETE',
     })
       .then(function (response) {
-        // convert the response to json
         return response.json();
       })
       .then(function () {
-        // after deleting, fetch the list again so the deleted item disappears
         fetch('/api/goals')
           .then(function (response) {
             return response.json();
           })
           .then(function (data) {
-            //sort again after deleting
+            if (!Array.isArray(data)) {
+              setGoals([]);
+              return;
+            }
             const sorted = data.sort(function (a, b) {
-              return new Date(a.deadline) - new Date(b.deadline);
+              return new Date(b.deadline) - new Date(a.deadline);
             });
-            // update goals list with the new data
             setGoals(sorted);
           });
       });
   }
 
   return (
-    <div className="goal-list">
-      <h2>My Goals</h2>
+    <section className="goal-list" aria-labelledby="my-goals-heading">
+      <h2 id="my-goals-heading">My Goals</h2>
+      <p className="goal-list-description">
+        Track the carbon-reduction goals you have set. Edit to update progress
+        or remove goals once they are no longer relevant.
+      </p>
 
       <ul>
         {goals.map(function (goal) {
@@ -76,17 +85,21 @@ function GoalList({ onEdit, refreshTrigger }) {
               <span>{goal.note}</span>
 
               <button
+                type="button"
                 onClick={function () {
                   onEdit(goal);
                 }}
+                aria-label={'Edit goal: ' + goal.title}
               >
                 Edit
               </button>
 
               <button
+                type="button"
                 onClick={function () {
                   handleDelete(goal._id);
                 }}
+                aria-label={'Delete goal: ' + goal.title}
               >
                 Delete
               </button>
@@ -94,7 +107,13 @@ function GoalList({ onEdit, refreshTrigger }) {
           );
         })}
       </ul>
-    </div>
+
+      {goals.length === 0 && (
+        <p className="no-results">
+          You have no goals yet. Use the form to create your first one.
+        </p>
+      )}
+    </section>
   );
 }
 

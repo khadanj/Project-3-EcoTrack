@@ -84,6 +84,15 @@ npm run dev
 http://localhost:5173
 ```
 
+## Demo Account
+
+If you just want to explore the app with the seeded data (~3,250 activities and ~750 goals), sign in with the demo account created by `seed.js`:
+
+- **Email:** `demo@ecotrack.com`
+- **Password:** `demo1234`
+
+Newly registered users start with an empty log because every activity and goal is now scoped to its owner — you only see and manage your own records.
+
 ## How to Use the App
 
 ### 1. Create an Account
