@@ -115,8 +115,10 @@ Click the **Logout** button in the top-right navigation bar to end your session.
 - Part 2 of Video Demo: https://www.youtube.com/watch?v=njjBO_ch11Y
 - Video Demo for Final Project: https://www.loom.com/share/cea81fbbba2240a3a26ecc459ab440d1
 
-## Link to Usability Study
-- Tamiyoo's Usability Study Report: https://docs.google.com/document/d/1YtWWntpflgujj3bVe08dy-nTe03ZmPX49nKNPX9T4Ng/edit?tab=t.0#heading=h.e1aq9w3u6mh
+## Links to Usability Study
+- P1: https://www.youtube.com/watch?v=3cHrLai7cNo
+- P2: https://www.youtube.com/watch?v=FAVC5j2YOAc
+- P3: https://www.youtube.com/watch?v=BWurwUSo1sA
 
 ## License
 MIT License - see LICENSE file for details
