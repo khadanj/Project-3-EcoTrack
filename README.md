@@ -23,16 +23,16 @@ EcoTrack is a full stack web application that helps everyday people understand a
 ![login page to EcoTrack that features a green background along with an email field and a password field. Below that is a green button that says login. Underneath has a message that says "No account with Us? Register" Register is a hyperlink ](<images/Screenshot (276).png>)
 
 ### Register Page
-![alt text](<images/Screenshot (277).png>)
+![alt text](<images/register.png>)
 
 ### Activity Log
-![alt text](<images/Screenshot (278).png>)
+![alt text](<images/activity.png>)
 
 ### Create Goal Page
-![alt text](<images/Screenshot (279).png>)
+![alt text](<images/goals.png>)
 
 ## Public Deployment Link
-[[Render Deployment Link]](https://ecotrack-final-project.vercel.app/)
+[[Render Deployment Link]](https://project-3-ecotrack-frontend.onrender.com)
 
 ## Instructions to Build
 
@@ -46,7 +46,7 @@ Make sure you have the following installed:
 
 1. Clone the repository:
 ```
-git clone https://github.com/TamiyooD02/Project-3-EcoTrack.git
+git clone https://github.com/khadanj/Project-3-EcoTrack.git
 ```
 
 2. Start MongoDB using Docker:
