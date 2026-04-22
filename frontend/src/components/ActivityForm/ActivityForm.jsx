@@ -13,7 +13,7 @@ function ActivityForm({ selectedActivity, onSave }) {
   const [note, setNote] = useState('');
 
   // stores the popup message to show after saving
-  const [confirmMessage, setConfirmMessage] = useState('')
+  const [confirmMessage, setConfirmMessage] = useState('');
 
   // when selectedActivity changes it means the user clicked edit
   useEffect(
@@ -102,22 +102,21 @@ function ActivityForm({ selectedActivity, onSave }) {
           setNote('');
           showConfirm('Activity saved successfully!');
           onSave();
-    });
-  }
-
+        });
+    }
   }
 
   return (
     <div className="activity-form">
       <h2>{selectedActivity ? 'Edit Activity' : 'Log New Activity'}</h2>
-      
-      {confirmMessage && (
-        <p className="confirm-message">{confirmMessage}</p>
-      )}
+
+      <div role="status" aria-live="polite" className="confirm-message-region">
+        {confirmMessage && <p className="confirm-message">{confirmMessage}</p>}
+      </div>
 
       <form onSubmit={handleSubmit}>
         <div>
-            <label htmlFor="activity-type">Type: </label>
+          <label htmlFor="activity-type">Type: </label>
           <input
             id="activity-type"
             type="text"
@@ -138,37 +137,39 @@ function ActivityForm({ selectedActivity, onSave }) {
               setCategory(e.target.value);
             }}
           >
-              <option value=""> select category </option>
-              <option value="transport">Transport</option>
-              <option value="diet">Diet</option>
-              <option value="energy">Energy</option>
-          </select>    
+            <option value=""> select category </option>
+            <option value="transport">Transport</option>
+            <option value="diet">Diet</option>
+            <option value="energy">Energy</option>
+          </select>
         </div>
 
-        <div>
-          <label htmlFor="activity-value">Value: </label>
-          <input
-            id="activity-value"
-            type="number"
-            placeholder="e.g. 30"
-            value={value}
-            onChange={function (e) {
-              setValue(e.target.value);
-            }}
-          />
-        </div>
+        <div className="form-row">
+          <div className="form-row-field form-row-value">
+            <label htmlFor="activity-value">Value: </label>
+            <input
+              id="activity-value"
+              type="number"
+              placeholder="e.g. 30"
+              value={value}
+              onChange={function (e) {
+                setValue(e.target.value);
+              }}
+            />
+          </div>
 
-        <div>
-          <label htmlFor="activity-unit">Unit: </label>
-          <input
-            id="activity-unit"
-            type="text"
-            placeholder="e.g. miles, servings"
-            value={unit}
-            onChange={function (e) {
-              setUnit(e.target.value);
-            }}
-          />
+          <div className="form-row-field form-row-unit">
+            <label htmlFor="activity-unit">Unit: </label>
+            <input
+              id="activity-unit"
+              type="text"
+              placeholder="e.g. miles, servings"
+              value={unit}
+              onChange={function (e) {
+                setUnit(e.target.value);
+              }}
+            />
+          </div>
         </div>
 
         <div>

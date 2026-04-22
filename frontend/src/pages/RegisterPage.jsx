@@ -43,7 +43,11 @@ function RegisterPage({ onRegisterSuccess }) {
       <h1 className="app-title"> EcoTrack</h1>
       <h2>Register</h2>
 
-      {error && <p className="error-message" role="alert">{error}</p>}
+      {error && (
+        <p className="error-message" role="alert">
+          {error}
+        </p>
+      )}
 
       <form onSubmit={handleSubmit}>
         <div>

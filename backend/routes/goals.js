@@ -7,14 +7,23 @@ import { ObjectId } from 'mongodb';
 // import database connection
 import { getDB } from '../db.js';
 
+// import auth middleware so only logged-in users can use these routes
+import isAuthenticated from '../middleware/auth.js';
+
 //create the router
 const router = express.Router();
 
-// adds new goal to database
+// every goals route requires an authenticated user
+router.use(isAuthenticated);
+
+// adds new goal to database, owned by the current user
 router.post('/', async (req, res) => {
   try {
     const db = getDB();
-    const goal = req.body;
+    const goal = {
+      ...req.body,
+      userId: new ObjectId(req.user._id),
+    };
     const result = await db.collection('goals').insertOne(goal);
     res.json(result);
   } catch {
@@ -22,16 +31,15 @@ router.post('/', async (req, res) => {
   }
 });
 
-// gets all goals
+// gets only the current user's goals
 router.get('/', async (req, res) => {
   try {
     const db = getDB();
-    const filter = {};
+    const filter = { userId: new ObjectId(req.user._id) };
     if (req.query.status) {
       filter.status = req.query.status;
     }
 
-    // get goals from database
     const goals = await db.collection('goals').find(filter).toArray();
 
     res.json(goals);
@@ -40,33 +48,42 @@ router.get('/', async (req, res) => {
   }
 });
 
-//updates one goal by its id
+// updates one of the current user's goals
 router.put('/:id', async (req, res) => {
   try {
     const db = getDB();
-
-    //convert the id from a string to mongodb ObjectId
     const id = new ObjectId(req.params.id);
-    const updatedGoal = req.body;
+    const userId = new ObjectId(req.user._id);
+
+    const updatedGoal = { ...req.body };
+    delete updatedGoal.userId;
+    delete updatedGoal._id;
 
     const result = await db
       .collection('goals')
-      .updateOne({ _id: id }, { $set: updatedGoal });
+      .updateOne({ _id: id, userId }, { $set: updatedGoal });
+
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ message: 'Goal not found' });
+    }
     res.json(result);
   } catch {
     res.status(500).json({ message: 'Error updating goal' });
   }
 });
 
-// deletes goal by its id
+// deletes one of the current user's goals
 router.delete('/:id', async (req, res) => {
   try {
     const db = getDB();
-
-    //converts id from a string to mongodb ObjectId
     const id = new ObjectId(req.params.id);
+    const userId = new ObjectId(req.user._id);
 
-    const result = await db.collection('goals').deleteOne({ _id: id });
+    const result = await db.collection('goals').deleteOne({ _id: id, userId });
+
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ message: 'Goal not found' });
+    }
     res.json(result);
   } catch {
     res.status(500).json({ message: 'Error deleting goal' });

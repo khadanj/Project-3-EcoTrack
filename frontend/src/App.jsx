@@ -93,36 +93,45 @@ function AppContent() {
 
   return (
     <div>
+      <a className="skip-link" href="#main-content">
+        Skip to main content
+      </a>
       <header className="app-header">
         <h1>EcoTrack</h1>
 
-        <nav className="navbar">
+        <nav className="navbar" aria-label="Primary">
           <button
+            type="button"
             onClick={function () {
               setCurrentView('activities');
             }}
-            className={currentView === 'activities' ? 'navbar-btn active' : 'navbar-btn'}
-            disabled={currentView === 'activities'}
+            className={
+              currentView === 'activities' ? 'navbar-btn active' : 'navbar-btn'
+            }
             aria-current={currentView === 'activities' ? 'page' : undefined}
           >
             Log Activities
           </button>
           <button
+            type="button"
             onClick={function () {
               setCurrentView('goals');
             }}
-            className={currentView === 'goals' ? 'navbar-btn active' : 'navbar-btn'}
-            disabled={currentView === 'goals'}
+            className={
+              currentView === 'goals' ? 'navbar-btn active' : 'navbar-btn'
+            }
             aria-current={currentView === 'goals' ? 'page' : undefined}
           >
             Create Goals
           </button>
           <span className="welcome-text">Welcome, {user.name}!</span>
-          <button className="navbar-btn" onClick={handleLogout}>Logout</button>
+          <button type="button" className="navbar-btn" onClick={handleLogout}>
+            Logout
+          </button>
         </nav>
       </header>
 
-      <main className="app-content">
+      <main id="main-content" className="app-content" tabIndex="-1">
         {currentView === 'activities' && (
           <div className="view-container">
             <ActivityForm

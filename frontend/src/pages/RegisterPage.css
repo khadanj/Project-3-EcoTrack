@@ -3,13 +3,13 @@
   margin: 80px auto;
   padding: 30px;
   background-color: white;
-  border: 1px solid #a5d6a7;
+  border: 1px solid var(--color-accent);
   border-radius: 8px;
 }
 
 .register-page h2 {
   text-align: center;
-  color: #2e7d32;
+  color: var(--color-primary);
   margin-bottom: 20px;
 }
 
@@ -37,7 +37,7 @@
 .register-page button[type='submit'] {
   width: 100%;
   padding: 10px;
-  background-color: #2e7d32;
+  background-color: var(--color-primary);
   color: white;
   border: none;
   border-radius: 4px;
@@ -47,7 +47,7 @@
 }
 
 .register-page button[type='submit']:hover {
-  background-color: #1b5e20;
+  background-color: var(--color-primary-hover);
 }
 
 .register-page p {
@@ -59,16 +59,16 @@
 .register-page p button {
   background: none;
   border: none;
-  color: #2e7d32;
+  color: var(--color-primary);
   cursor: pointer;
   text-decoration: underline;
   font-size: 14px;
 }
 
 .error-message {
-  background-color: #ffebee;
-  color: #c62828;
-  border: 1px solid #c62828;
+  background-color: var(--color-danger-bg);
+  color: var(--color-danger);
+  border: 1px solid var(--color-danger);
   border-radius: 4px;
   padding: 8px 12px;
   font-size: 14px;
@@ -77,7 +77,7 @@
 
 .app-title {
   text-align: center;
-  color: #2e7d32;
+  color: var(--color-primary);
   font-size: 28px;
   font-weight: 600;
   margin-bottom: 10px;

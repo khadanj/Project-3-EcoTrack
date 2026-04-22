@@ -13,6 +13,9 @@ function GoalForm({ selectedGoal, onSave }) {
   const [status, setStatus] = useState('active');
   const [note, setNote] = useState('');
 
+  // stores the popup message to show after saving
+  const [confirmMessage, setConfirmMessage] = useState('');
+
   // when selectedGoal changes it means the user clicked edit
   useEffect(
     function () {
@@ -25,18 +28,28 @@ function GoalForm({ selectedGoal, onSave }) {
         setStatus(selectedGoal.status);
         setNote(selectedGoal.note);
       } else {
-        // if no goal is selected clear the form
-        setTitle('');
-        setCategory('');
-        setTargetValue('');
-        setTargetUnit('');
-        setDeadline('');
-        setStatus('active');
-        setNote('');
+        resetForm();
       }
     },
     [selectedGoal],
   );
+
+  function resetForm() {
+    setTitle('');
+    setCategory('');
+    setTargetValue('');
+    setTargetUnit('');
+    setDeadline('');
+    setStatus('active');
+    setNote('');
+  }
+
+  function showConfirm(message) {
+    setConfirmMessage(message);
+    setTimeout(function () {
+      setConfirmMessage('');
+    }, 3000);
+  }
 
   // this function runs when the user clicks the save button
   function handleSubmit(e) {
@@ -57,7 +70,6 @@ function GoalForm({ selectedGoal, onSave }) {
     // if selectedGoal has an id it means an existing goal is being edited
     // if not, create a new one
     if (selectedGoal) {
-      // send a PUT request to update the existing goal
       fetch('/api/goals/' + selectedGoal._id, {
         method: 'PUT',
         headers: {
@@ -69,11 +81,10 @@ function GoalForm({ selectedGoal, onSave }) {
           return response.json();
         })
         .then(function () {
-          // tell the parent component to save
+          showConfirm('Goal updated successfully!');
           onSave();
         });
     } else {
-      // send a POST request to create a new goal
       fetch('/api/goals', {
         method: 'POST',
         headers: {
@@ -85,7 +96,8 @@ function GoalForm({ selectedGoal, onSave }) {
           return response.json();
         })
         .then(function () {
-          // tell the parent component to save
+          resetForm();
+          showConfirm('Goal saved successfully!');
           onSave();
         });
     }
@@ -95,10 +107,15 @@ function GoalForm({ selectedGoal, onSave }) {
     <div className="goal-form">
       <h2>{selectedGoal ? 'Edit Goal' : 'Create New Goal'}</h2>
 
+      <div role="status" aria-live="polite" className="confirm-message-region">
+        {confirmMessage && <p className="confirm-message">{confirmMessage}</p>}
+      </div>
+
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Title: </label>
+          <label htmlFor="goal-title">Title: </label>
           <input
+            id="goal-title"
             type="text"
             placeholder="e.g. Reduce meat consumption by 20%"
             value={title}
@@ -109,8 +126,9 @@ function GoalForm({ selectedGoal, onSave }) {
         </div>
 
         <div>
-          <label>Category: </label>
+          <label htmlFor="goal-category">Category: </label>
           <input
+            id="goal-category"
             type="text"
             placeholder="e.g. transport, diet, energy"
             value={category}
@@ -120,33 +138,38 @@ function GoalForm({ selectedGoal, onSave }) {
           />
         </div>
 
-        <div>
-          <label>Target Value: </label>
-          <input
-            type="number"
-            placeholder="e.g. 20"
-            value={targetValue}
-            onChange={function (e) {
-              setTargetValue(e.target.value);
-            }}
-          />
+        <div className="form-row">
+          <div className="form-row-field form-row-value">
+            <label htmlFor="goal-target-value">Target Value: </label>
+            <input
+              id="goal-target-value"
+              type="number"
+              placeholder="e.g. 20"
+              value={targetValue}
+              onChange={function (e) {
+                setTargetValue(e.target.value);
+              }}
+            />
+          </div>
+
+          <div className="form-row-field form-row-unit">
+            <label htmlFor="goal-target-unit">Target Unit: </label>
+            <input
+              id="goal-target-unit"
+              type="text"
+              placeholder="e.g. %, miles, servings"
+              value={targetUnit}
+              onChange={function (e) {
+                setTargetUnit(e.target.value);
+              }}
+            />
+          </div>
         </div>
 
         <div>
-          <label>Target Unit: </label>
+          <label htmlFor="goal-deadline">Deadline: </label>
           <input
-            type="text"
-            placeholder="e.g. %, miles, servings"
-            value={targetUnit}
-            onChange={function (e) {
-              setTargetUnit(e.target.value);
-            }}
-          />
-        </div>
-
-        <div>
-          <label>Deadline: </label>
-          <input
+            id="goal-deadline"
             type="date"
             value={deadline}
             onChange={function (e) {
@@ -156,8 +179,9 @@ function GoalForm({ selectedGoal, onSave }) {
         </div>
 
         <div>
-          <label>Status: </label>
+          <label htmlFor="goal-status">Status: </label>
           <select
+            id="goal-status"
             value={status}
             onChange={function (e) {
               setStatus(e.target.value);
@@ -169,8 +193,9 @@ function GoalForm({ selectedGoal, onSave }) {
         </div>
 
         <div>
-          <label>Note: </label>
+          <label htmlFor="goal-note">Note: </label>
           <input
+            id="goal-note"
             type="text"
             placeholder="e.g. monthly target"
             value={note}

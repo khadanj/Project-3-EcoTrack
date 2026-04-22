@@ -2,14 +2,14 @@
   flex: 1;
   padding: 20px;
   background-color: white;
-  border: 1px solid #a5d6a7;
+  border: 1px solid var(--color-accent);
   border-radius: 8px;
   overflow-y: auto;
   max-height: 600px;
 }
 
 .activity-list h2 {
-  color: #2e7d32;
+  color: var(--color-primary);
   margin-bottom: 15px;
 }
 
@@ -21,13 +21,13 @@
 
 .activity-list li {
   display: flex;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
   gap: 8px;
   align-items: center;
   padding: 10px;
   margin-bottom: 8px;
   background-color: #f1f8e9;
-  border: 1px solid #c8e6c9;
+  border: 1px solid var(--color-accent-soft);
   border-radius: 6px;
   font-size: 14px;
 }
@@ -35,7 +35,7 @@
 /* edit button */
 .activity-list li button:first-of-type {
   padding: 4px 10px;
-  background-color: #2e7d32;
+  background-color: var(--color-primary);
   color: white;
   border: none;
   border-radius: 4px;
@@ -47,7 +47,7 @@
 /* delete button */
 .activity-list li button:last-of-type {
   padding: 4px 10px;
-  background-color: #c62828;
+  background-color: var(--color-danger);
   color: white;
   border: none;
   border-radius: 4px;
@@ -79,4 +79,50 @@
   font-size: 14px;
   text-align: center;
   padding: 20px 0;
+}
+
+.activity-list-description {
+  color: var(--color-text-muted, #555);
+  font-size: 14px;
+  margin: 0 0 16px 0;
+  line-height: 1.5;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-accent, var(--color-accent));
+}
+
+.pagination button {
+  padding: 6px 14px;
+  background-color: var(--color-primary, var(--color-primary));
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: inherit;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: var(--color-primary-hover, var(--color-primary-hover));
+}
+
+.pagination button:disabled {
+  background-color: var(--color-accent, var(--color-accent));
+  color: #555;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.pagination-status {
+  font-size: 14px;
+  color: var(--color-text-muted, #555);
+  min-width: 90px;
+  text-align: center;
 }

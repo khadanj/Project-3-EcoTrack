@@ -7,14 +7,23 @@ import { ObjectId } from 'mongodb';
 // import database connection
 import { getDB } from '../db.js';
 
+// import auth middleware so only logged-in users can use these routes
+import isAuthenticated from '../middleware/auth.js';
+
 //create the router
 const router = express.Router();
 
-// adds new activity to database
+// every activities route requires an authenticated user
+router.use(isAuthenticated);
+
+// adds new activity to database, owned by the current user
 router.post('/', async (req, res) => {
   try {
     const db = getDB();
-    const activity = req.body;
+    const activity = {
+      ...req.body,
+      userId: new ObjectId(req.user._id),
+    };
     const result = await db.collection('activities').insertOne(activity);
     res.json(result);
   } catch {
@@ -22,17 +31,21 @@ router.post('/', async (req, res) => {
   }
 });
 
-// gets all activities
+// gets only the current user's activities
 router.get('/', async (req, res) => {
   try {
     const db = getDB();
-    const filter = {};
+    const filter = { userId: new ObjectId(req.user._id) };
     if (req.query.date) {
       filter.date = req.query.date;
     }
 
-    // get activities from database
-    const activities = await db.collection('activities').find(filter).toArray();
+    // activities are returned newest first so the UI doesn't need to re-sort
+    const activities = await db
+      .collection('activities')
+      .find(filter)
+      .sort({ date: -1 })
+      .toArray();
 
     res.json(activities);
   } catch {
@@ -40,33 +53,45 @@ router.get('/', async (req, res) => {
   }
 });
 
-//updates one activity by its id
+// updates one of the current user's activities
 router.put('/:id', async (req, res) => {
   try {
     const db = getDB();
-
-    //convert the id from a string to mongodb ObjectId
     const id = new ObjectId(req.params.id);
-    const updatedActivity = req.body;
+    const userId = new ObjectId(req.user._id);
+
+    // strip any attempt to reassign ownership from the request body
+    const updatedActivity = { ...req.body };
+    delete updatedActivity.userId;
+    delete updatedActivity._id;
 
     const result = await db
       .collection('activities')
-      .updateOne({ _id: id }, { $set: updatedActivity });
+      .updateOne({ _id: id, userId }, { $set: updatedActivity });
+
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ message: 'Activity not found' });
+    }
     res.json(result);
   } catch {
     res.status(500).json({ message: 'Error updating activity' });
   }
 });
 
-// deletes activity by its id
+// deletes one of the current user's activities
 router.delete('/:id', async (req, res) => {
   try {
     const db = getDB();
-
-    //converts id from a string to mongodb ObjectId
     const id = new ObjectId(req.params.id);
+    const userId = new ObjectId(req.user._id);
 
-    const result = await db.collection('activities').deleteOne({ _id: id });
+    const result = await db
+      .collection('activities')
+      .deleteOne({ _id: id, userId });
+
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ message: 'Activity not found' });
+    }
     res.json(result);
   } catch {
     res.status(500).json({ message: 'Error deleting activity ' });
